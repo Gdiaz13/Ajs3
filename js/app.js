@@ -83,4 +83,25 @@
       // Define a one-way binding for the 'foundItems' property and a function reference binding for the 'onRemove' property
       scope: {
         foundItems: '<',
-        onRemove:
+        onRemove:'&'
+      },
+      controller: FoundItemsDirectiveController,
+      controllerAs: 'foundItemsDirectiveCtrl',
+      bindToController: true
+    };
+
+    return ddo;
+  }
+
+  // Define the controller for the 'foundItems' directive
+  function FoundItemsDirectiveController() {
+    var foundItemsDirectiveCtrl = this;
+
+    // Define a function to check if the 'found' array is empty
+    foundItemsDirectiveCtrl.isEmpty = function () {
+      return foundItemsDirectiveCtrl.foundItems.length === 0;
+    };
+  }
+
+})();
+
