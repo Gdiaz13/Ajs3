@@ -1,74 +1,83 @@
-// Wrap the code inside an Immediately Invoked Function Expression (IIFE)
-// to avoid polluting the global namespace
+// This is an Immediately Invoked Function Expression (IIFE).
+// It's a good practice to wrap your code in an IIFE to avoid
+// polluting the global scope.
 (function () {
-  'use strict'; // Enable strict mode to catch common JavaScript errors
+  'use strict';
 
-  // Declare the AngularJS module named "NarrowItDownApp" with no dependencies
+  // Create an Angular module named 'NarrowItDownApp'
   angular.module('NarrowItDownApp', [])
 
-  // Register the "NarrowItDownController" controller with the "NarrowItDownApp" module
+  // Create a controller named 'NarrowItDownController'
   .controller('NarrowItDownController', NarrowItDownController)
 
-  // Register the "MenuSearchService" service with the "NarrowItDownApp" module
+  // Create a service named 'MenuSearchService'
   .service('MenuSearchService', MenuSearchService)
 
-  // Register the "foundItems" directive with the "NarrowItDownApp" module
+  // Create a directive named 'foundItems'
   .directive('foundItems', FoundItemsDirective);
 
-  // Define the "NarrowItDownController" controller
+  // Inject the 'MenuSearchService' dependency into the controller
+  NarrowItDownController.$inject = ['MenuSearchService'];
   function NarrowItDownController(MenuSearchService) {
-    var ctrl = this; // Assign the controller instance to the variable "ctrl"
+    var narrowItDown = this;
 
-    // Define the "search" function for the controller
-    ctrl.search = function () {
-      // Call the "getMatchedMenuItems" method from the "MenuSearchService"
-      // and pass the "searchTerm" from the input field
-      MenuSearchService.getMatchedMenuItems(ctrl.searchTerm)
-        .then(function (foundItems) {
-          // Assign the "foundItems" to the "found" property of the controller
-          ctrl.found = foundItems;
-        });
+    // Initialize the 'found' array to store the found menu items
+    narrowItDown.found = [];
+
+    // This function will be called when the "Narrow It Down For Me!" button is clicked
+    narrowItDown.searchMenuItems = function () {
+      // Call the 'getMatchedMenuItems' method from the 'MenuSearchService'
+      MenuSearchService.getMatchedMenuItems(narrowItDown.searchTerm)
+      .then(function (response) {
+        narrowItDown.found = response;
+      });
     };
 
-    // Define the "removeItem" function for the controller
-    ctrl.removeItem = function (index) {
-      // Remove the item at the given "index" from the "found" array
-      ctrl.found.splice(index, 1);
+    // This function will be called when the "Don't want this one!" button is clicked
+    narrowItDown.removeItem = function (index) {
+      narrowItDown.found.splice(index, 1);
     };
   }
 
-  // Define the "MenuSearchService" service
+  // Inject the '$http' service dependency into the 'MenuSearchService'
+  MenuSearchService.$inject = ['$http'];
   function MenuSearchService($http) {
-    var service = this; // Assign the service instance to the variable "service"
+    var service = this;
 
-    // Define the "getMatchedMenuItems" method for the service
+    // This function is responsible for fetching and filtering the menu items
     service.getMatchedMenuItems = function (searchTerm) {
-      // Send an HTTP GET request to the server to fetch the menu items
-      return $http.get('https://coursera-jhu-default-rtdb.firebaseio.com/menu_items.json')
-        .then(function (result) {
-          // Process the result and keep only the items that match the "searchTerm"
-          var foundItems = result.data.menu_items.filter(function (item) {
-            return item.description.includes(searchTerm);
-          });
+      return $http({
+        method: 'GET',
+        url: 'https://coursera-jhu-default-rtdb.firebaseio.com/menu_items.json'
+      })
+      .then(function (result) {
+        // Process the result and keep only items that match the 'searchTerm'
+        var foundItems = [];
+        var menuItems = result.data;
 
-          // Return the processed items
-          return foundItems;
-        });
+        for (var i = 0; i < menuItems.length; i++) {
+          var description = menuItems[i].description;
+          if (description.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) {
+            foundItems.push(menuItems[i]);
+          }
+        }
+
+        // Return the processed items
+        return foundItems;
+      });
     };
   }
 
-  // Define the "FoundItemsDirective" directive
+  // The 'FoundItemsDirective' function returns the directive definition object (DDO)
   function FoundItemsDirective() {
-    return {
-      templateUrl: 'foundItems.html', // The template URL for the directive
+    var ddo = {
+      templateUrl: 'foundItems.html',
       scope: {
-        foundItems: '<', // One-way binding for the "foundItems" attribute
-        onRemove: '&' // Function reference binding for the "onRemove" attribute
-      },
-      controller: 'NarrowItDownController', // The controller for the directive
-      controllerAs: 'ctrl', // The controller alias for the directive
-      bindToController: true // Bind the isolated scope properties to the controller
+        foundItems: '<',
+        onRemove: '&'
+      }
     };
+    return ddo;
   }
 
 })();
