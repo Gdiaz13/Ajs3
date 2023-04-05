@@ -1,47 +1,53 @@
-/* Style the body element, set the font family, max width, and center the content */
+/* Apply basic styling to the body element */
 body {
-  font-family: Arial, sans-serif;
-  max-width: 960px;
-  margin: 0 auto;
+  font-family: Arial, sans-serif; /* Set the font family for the body text */
+  margin: 0 auto; /* Center the content horizontally */
+  max-width: 768px; /* Set a maximum width for the content */
+  padding: 1rem; /* Add padding around the content */
 }
 
-/* Style the text input field */
+/* Style the h1 element */
+h1 {
+  font-size: 2rem; /* Set the font size for the h1 heading */
+  margin-bottom: 1rem; /* Add margin below the h1 heading */
+}
+
+/* Style the input element */
 input[type="text"] {
-  padding: 6px 12px; /* Add padding for a comfortable touch area */
-  font-size: 14px; /* Set the font size */
-  border: 1px solid #ccc; /* Add a border to the input field */
-  border-radius: 4px; /* Add rounded corners */
+  font-size: 1rem; /* Set the font size for the input text */
+  margin-bottom: 1rem; /* Add margin below the input text */
+  padding: 0.25rem; /* Add padding inside the input text */
+  width: 100%; /* Set the input width to 100% of the container */
 }
 
-/* Style the buttons */
+/* Style the button element */
 button {
-  background-color: #007bff; /* Set the background color */
-  border-color: #007bff; /* Set the border color */
-  color: white; /* Set the text color */
-  padding: 6px 12px; /* Add padding for a comfortable touch area */
-  font-size: 14px; /* Set the font size */
-  border-radius: 4px; /* Add rounded corners */
+  background-color: #007bff; /* Set the background color for the button */
+  border: none; /* Remove any border from the button */
+  color: white; /* Set the text color for the button */
   cursor: pointer; /* Change the cursor to a pointer when hovering over the button */
+  font-size: 1rem; /* Set the font size for the button */
+  margin-bottom: 1rem; /* Add margin below the button */
+  padding: 0.25rem 0.5rem; /* Add padding inside the button */
+  text-align: center; /* Center the text inside the button */
+  width: 100%; /* Set the button width to 100% of the container */
 }
 
-/* Style the buttons when hovered */
+/* Add hover effect for the button */
 button:hover {
-  background-color: #0056b3; /* Change the background color */
-  border-color: #004999; /* Change the border color */
+  background-color: #0056b3; /* Change the background color when the button is hovered */
 }
 
-/* Remove list-style (bullets) from the unordered list */
+/* Style the ul element */
 ul {
-  list-style-type: none;
-  padding: 0;
+  list-style-type: none; /* Remove bullet points from the list */
+  padding: 0; /* Remove padding from the list */
 }
 
-/* Style the list items */
+/* Style the li element */
 li {
-  margin: 12px 0; /* Add margin between list items */
-}
-
-/* Style the "Don't want this one!" button */
-li button {
-  margin-left: 12px; /* Add margin to the left of the button */
+  background-color: #f8f9fa; /* Set the background color for list items */
+  border: 1px solid #dee2e6; /* Add a border around the list items */
+  margin-bottom: 1rem; /* Add margin below the list items */
+  padding: 0.5rem; /* Add padding inside the list items */
 }
