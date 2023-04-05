@@ -1,0 +1,47 @@
+/* Style the body element, set the font family, max width, and center the content */
+body {
+  font-family: Arial, sans-serif;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* Style the text input field */
+input[type="text"] {
+  padding: 6px 12px; /* Add padding for a comfortable touch area */
+  font-size: 14px; /* Set the font size */
+  border: 1px solid #ccc; /* Add a border to the input field */
+  border-radius: 4px; /* Add rounded corners */
+}
+
+/* Style the buttons */
+button {
+  background-color: #007bff; /* Set the background color */
+  border-color: #007bff; /* Set the border color */
+  color: white; /* Set the text color */
+  padding: 6px 12px; /* Add padding for a comfortable touch area */
+  font-size: 14px; /* Set the font size */
+  border-radius: 4px; /* Add rounded corners */
+  cursor: pointer; /* Change the cursor to a pointer when hovering over the button */
+}
+
+/* Style the buttons when hovered */
+button:hover {
+  background-color: #0056b3; /* Change the background color */
+  border-color: #004999; /* Change the border color */
+}
+
+/* Remove list-style (bullets) from the unordered list */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Style the list items */
+li {
+  margin: 12px 0; /* Add margin between list items */
+}
+
+/* Style the "Don't want this one!" button */
+li button {
+  margin-left: 12px; /* Add margin to the left of the button */
+}
