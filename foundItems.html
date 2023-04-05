@@ -1,14 +1,12 @@
-<!-- Unordered list to display the found items -->
-<ul>
-  <!-- Use the ng-repeat directive to loop through the "items" array, creating a list item for each element -->
-  <li ng-repeat="item in items">
-    <!-- Display the name, short_name, and description of each item -->
-    {{ item.name }}, {{ item.short_name }}, {{ item.description }}
-
-    <!-- Button to remove the current item, calling the "onRemove" method and passing the current index -->
-    <button ng-click="onRemove({index: $index})">Don't want this one!</button>
-  </li>
-</ul>
-
 <!-- Display "Nothing found" if the "items" array is empty -->
 <p ng-if="items.length === 0">Nothing found</p>
+
+<!-- Template for the custom foundItems directive -->
+<!-- Iterate through the items array and display each item -->
+<ul>
+  <li ng-repeat="item in foundItemsCtrl.items">
+    {{ item.name }}, {{ item.short_name }}, {{ item.description }} <!-- Display name, short_name, and description of each item -->
+    <!-- Add a "Don't want this one!" button to remove the item -->
+    <button ng-click="foundItemsCtrl.onRemove({index: $index})">Don't want this one!</button>
+  </li>
+</ul>
